@@ -1,4 +1,4 @@
-import { ADD_DECK } from "../actions";
+import { ADD_DECK, FETCH_DECKS } from "../actions";
 
 const reducer = (state={}, action) => {
     switch(action.type){
@@ -9,6 +9,12 @@ const reducer = (state={}, action) => {
                     ...action.payload
                 }
             }
+        case FETCH_DECKS: {
+            return {
+                ...state,
+                ...action.payload
+            }
+        }
         default:
             return state
     }

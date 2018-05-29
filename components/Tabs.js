@@ -1,15 +1,21 @@
 import React, { Component } from 'react'
 import { TabNavigator, TabBarBottom } from 'react-navigation'
-import CardList from './CardList'
-import AddCard from './AddCard';
+import DeckList from './DeckList'
+import AddDeck from './AddDeck';
 
 const Tabs = TabNavigator(
     {
-        CardList: {
-            screen: CardList
+        DeckList: {
+            screen: DeckList,
+            navigationOptions: {
+                tabBarLabel: 'Decks',                
+            },
         },
-        AddCard: {
-            screen: AddCard
+        AddDeck: {
+            screen: AddDeck,
+            navigationOptions: {
+                tabBarLabel: 'Add Deck',                
+            },
         }
     },
     {

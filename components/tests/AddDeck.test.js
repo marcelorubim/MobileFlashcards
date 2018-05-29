@@ -1,9 +1,9 @@
 import React from 'react';
-import AddCard from '../AddCard';
+import AddDeck from '../AddDeck';
 
 import renderer from 'react-test-renderer';
 
 it('renders without crashing', () => {
-  const rendered = renderer.create(<AddCard />).toJSON();
+  const rendered = renderer.create(<AddDeck />).toJSON();
   expect(rendered).toBeTruthy();
 });
