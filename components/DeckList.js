@@ -9,7 +9,7 @@ class DeckList extends Component {
         const {decks} = this.props
         return (
             <ScrollView>
-                {decks && decks.map((d, i) => (<DeckListItem key={i} deck={d}/>))}
+                {decks && decks.map((d, i) => (<DeckListItem key={i} deck={d} navigation={this.props.navigation}/>))}
             </ScrollView>
         )
     }

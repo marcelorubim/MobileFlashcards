@@ -5,7 +5,7 @@ const reducer = (state={}, action) => {
         case ADD_DECK:
             return {
                 ...state,
-                [action.payload.id] : {
+                [action.payload.title] : {
                     ...action.payload
                 }
             }

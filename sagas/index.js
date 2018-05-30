@@ -7,7 +7,7 @@ function * addDeck(action) {
   console.log(decks)
   try {
     yield call(storage.mergeItem, storage.DECKS_KEY, {
-      [action.payload.id]: {
+      [action.payload.title]: {
         ...action.payload
       }
     })

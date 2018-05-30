@@ -1,13 +1,13 @@
 import React, {Component} from 'react'
-import {View, Text} from 'react-native'
+import {View, Text, StyleSheet} from 'react-native'
 import {Button} from 'react-native-elements'
 import TextInput from './ui/TextInput';
 import Label from './ui/Label';
 import Container from './ui/Container'
 import {connect} from 'react-redux'
 import {addDeck} from '../actions'
+import { black } from '../utils/colors'
 import uuid from 'uuid'
-
 
 class AddCard extends Component {
     state = {
@@ -15,33 +15,46 @@ class AddCard extends Component {
     }
     setTitle = (title) => {
         this.setState(() => ({
-            ...this.state,
             title
         }))
     }
     addDeck = (e) => {
-        console.log('Add Deck')
+        const { title } = this.state
         this
             .props
             .addDeck({
-                id: uuid.v1(),
-                cardsCount: 0,
-                deleted: false,
-                ...this.state
+                title,
+                questions: []
             })
+        this.setState({
+            title: ''
+        })
+        this.decksTitle.setNativeProps({ text: '' })
+
+        this.props.navigation.navigate('DeckList')
     }
     render() {
         return (
-            <Container>
+            <Container style={styles.container}>
                 <Label>Deck's Title</Label>
                 <TextInput
                     underlineColorAndroid='white'
+                    ref={element => {
+                        this.decksTitle = element
+                      }}
                     onChangeText={(text) => this.setTitle(text)}/>
-                <Button raised large onPress={this.addDeck} title='CREATE'/>
+                <Button buttonStyle={{backgroundColor:black}} raised large onPress={this.addDeck} title='Save Deck' />
             </Container>
         )
     }
 }
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'stretch',
+        justifyContent: 'space-evenly'
+    }
+})
 const mapDispatchToProps = (dispatch) => ({
     addDeck: (deck) => dispatch(addDeck(deck))
 })

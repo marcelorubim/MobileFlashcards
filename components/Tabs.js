@@ -17,9 +17,6 @@ const Tabs = TabNavigator(
                 tabBarLabel: 'Add Deck',                
             },
         }
-    },
-    {
-        tabBarPosition: 'bottom',
     }
 )
 
