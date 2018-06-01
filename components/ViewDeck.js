@@ -1,22 +1,51 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet } from 'react-native'
 import { Button } from 'react-native-elements'
-import { black } from '../utils/colors'
+import { dark, white, black } from '../utils/colors'
+import { connect } from 'react-redux'
 
 
 class ViewDeck extends Component {
+    static navigationOptions = ({ navigation }) => {
+        const { params } = navigation.state;
+        return {
+          title: params ? params.deck.title : '',
+            headerStyle: {
+                backgroundColor: dark,
+            },
+            headerTintColor: white,
+        };
+      };
     render() {
         console.log(this.props)
-        const {deck} = this.props.navigation.state.params
+        const { deck } = this.props
         return (
             <View style={styles.container}>
                 <View style={styles.view}>
-                    <Text style={styles.title}>{deck.title}</Text>
-                    <Text style={styles.questions}>{deck.questions.length} cards</Text>
+                    <Text 
+                        style={styles.title}>
+                            {deck.title}
+                    </Text>
+                    <Text 
+                        style={styles.questions}>
+                            {deck.questions.length} cards
+                    </Text>
                 </View>
                 <View style={styles.viewB}>
-                    <Button containerStyle={styles.button} raised large onPress={this.addDeck} title='Add Card'/>
-                    <Button containerStyle={styles.button} buttonStyle={{backgroundColor:black}} raised large onPress={this.addDeck} title='Start Quiz'/>
+                    <Button 
+                        containerStyle={styles.button} 
+                        raised 
+                        large
+                        onPress={() => this.props.navigation.navigate('AddCard', { title: deck.title })} 
+                        title='Add Card'
+                    />
+                    <Button 
+                        containerStyle={styles.button} 
+                        buttonStyle={{backgroundColor:black}} 
+                        large 
+                        onPress={() => this.props.navigation.navigate('ViewCard', { deck })} 
+                        title='Start Quiz'
+                    />
                 </View>
             </View>
         )
@@ -48,4 +77,7 @@ const styles = StyleSheet.create({
         marginBottom: 10
     }
 })
-export default ViewDeck
+const mapStateToProps = ({ decks }, { navigation }) => ({
+    deck: decks[navigation.state.params.deck.title]
+})
+export default connect(mapStateToProps)(ViewDeck)

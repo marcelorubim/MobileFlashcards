@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {View, Text, StyleSheet} from 'react-native'
+import {KeyboardAvoidingView, Text, StyleSheet} from 'react-native'
 import {Button} from 'react-native-elements'
 import TextInput from './ui/TextInput';
 import Label from './ui/Label';
@@ -35,7 +35,9 @@ class AddCard extends Component {
     }
     render() {
         return (
+            <KeyboardAvoidingView behavior='padding' style={{flex:1}}>
             <Container style={styles.container}>
+                
                 <Label>Deck's Title</Label>
                 <TextInput
                     underlineColorAndroid='white'
@@ -43,8 +45,9 @@ class AddCard extends Component {
                         this.decksTitle = element
                       }}
                     onChangeText={(text) => this.setTitle(text)}/>
-                <Button buttonStyle={{backgroundColor:black}} raised large onPress={this.addDeck} title='Save Deck' />
+                <Button buttonStyle={{backgroundColor:black}} raised large onPress={this.addDeck} title='Save Deck' />                
             </Container>
+            </KeyboardAvoidingView>
         )
     }
 }
