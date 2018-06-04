@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { TabNavigator, TabBarBottom } from 'react-navigation'
+import { createMaterialTopTabNavigator, TabBarBottom } from 'react-navigation'
 import DeckList from './DeckList'
 import AddDeck from './AddDeck';
 import { dark } from '../utils/colors'
 
-const Tabs = TabNavigator(
+const Tabs = createMaterialTopTabNavigator(
     {
         DeckList: {
             screen: DeckList,

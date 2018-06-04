@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet } from 'react-native'
 import { Button } from 'react-native-elements'
-import { dark, white, black } from '../utils/colors'
+import { dark, white, black, primary } from '../utils/colors'
 import { connect } from 'react-redux'
 
 
@@ -33,19 +33,26 @@ class ViewDeck extends Component {
                 </View>
                 <View style={styles.viewB}>
                     <Button 
+                        buttonStyle={{
+                            backgroundColor: primary
+                        }}
                         containerStyle={styles.button} 
                         raised 
                         large
                         onPress={() => this.props.navigation.navigate('AddCard', { title: deck.title })} 
                         title='Add Card'
                     />
-                    <Button 
-                        containerStyle={styles.button} 
-                        buttonStyle={{backgroundColor:black}} 
-                        large 
-                        onPress={() => this.props.navigation.navigate('ViewCard', { deck })} 
-                        title='Start Quiz'
-                    />
+                    {deck.questions.length > 0 &&
+                        <Button 
+                            buttonStyle={{
+                                backgroundColor: dark
+                            }}
+                            containerStyle={styles.button} 
+                            large 
+                            onPress={() => this.props.navigation.navigate('ViewCard', { deck, currIndex: 0 })} 
+                            title='Start Quiz'
+                        />
+                    }                    
                 </View>
             </View>
         )
@@ -74,7 +81,7 @@ const styles = StyleSheet.create({
     },
     button: {
         marginTop: 10,
-        marginBottom: 10
+        marginBottom: 10,
     }
 })
 const mapStateToProps = ({ decks }, { navigation }) => ({

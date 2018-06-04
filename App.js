@@ -1,18 +1,21 @@
 import React from 'react';
-import { StyleSheet, Text, View, Animated, Easing } from 'react-native';
+import { View, Animated, Easing } from 'react-native';
 import Tabs from './components/Tabs'
 import AppStatusBar from './components/AppStatusBar'
 import ViewDeck from './components/ViewDeck'
 import ViewCard from './components/ViewCard'
+import ViewScore from './components/ViewScore'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import reducers from './reducers'
 import { logger } from 'redux-logger'
 import createSagaMiddleware from 'redux-saga'
 import mySaga from './sagas'
-import { StackNavigator } from 'react-navigation'
+import { createStackNavigator } from 'react-navigation'
 import AddCard from './components/AddCard';
 import { dark, white } from './utils/colors'
+import { setLocalNotification } from './utils/notification';
+
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -48,7 +51,7 @@ const transitionConfig = () => {
       },
   }}
 
-const Routes = StackNavigator({
+const Routes = createStackNavigator({
    Tabs: {
     screen: Tabs,
     navigationOptions: ({ navigation }) => ({
@@ -76,13 +79,27 @@ const Routes = StackNavigator({
         backgroundColor: dark,
       },
       headerTintColor: white,
+    })   
+  },
+  ViewScore: {
+    screen: ViewScore,
+    navigationOptions: ({ navigation }) => ({
+      title:'Result',
+      headerStyle: {
+        backgroundColor: dark,
+      },
+      headerTintColor: white,
     }),
   }
 }, {
   transitionConfig,
 })
 
+
 export default class App extends React.Component {
+  componentDidMount(){
+    setLocalNotification()
+  }
   render() {
     return (
       <Provider store={store}>
