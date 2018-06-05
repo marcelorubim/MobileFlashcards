@@ -4,6 +4,7 @@ import TextInput from './ui/TextInput';
 import { Button } from 'react-native-elements'
 import {connect} from 'react-redux'
 import { addCard } from '../actions'
+import { primary } from '../utils/colors';
 
 
 class AddCard extends Component {
@@ -44,7 +45,13 @@ class AddCard extends Component {
                     underlineColorAndroid='white'
                     onChangeText={(text) => this.setAnswer(text)}
                 />
-                <Button raised large onPress={this.submit} title='Submit' />
+                <Button 
+                    raised 
+                    large 
+                    buttonStyle={{backgroundColor: primary}}
+                    disabled={this.state.answer.length === 0 || this.state.question.length === 0}
+                    onPress={this.submit} title='Submit' 
+                />
             </KeyboardAvoidingView>
         )
     }

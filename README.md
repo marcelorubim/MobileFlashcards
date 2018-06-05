@@ -1,7 +1,11 @@
-# Leitura
+# Mobile Flashcards
 
 This project was made as part of the Udacity's Nanodegree React Developer 
 Mobile Flash Cards let the users create a set of decks and cards to help with his studies.
+
+## Plataform
+
+This app was tested on Android.
 
 ## Install
 

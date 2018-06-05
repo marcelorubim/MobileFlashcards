@@ -45,7 +45,13 @@ class AddCard extends Component {
                         this.decksTitle = element
                       }}
                     onChangeText={(text) => this.setTitle(text)}/>
-                <Button buttonStyle={{backgroundColor:black}} raised large onPress={this.addDeck} title='Save Deck' />                
+                <Button 
+                    buttonStyle={{backgroundColor:black}} 
+                    raised 
+                    large 
+                    disabled={this.state.title.length === 0}
+                    onPress={this.addDeck} title='Save Deck' 
+                />                
             </Container>
             </KeyboardAvoidingView>
         )

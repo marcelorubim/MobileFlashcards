@@ -40,7 +40,7 @@ class ViewDeck extends Component {
                         raised 
                         large
                         onPress={() => this.props.navigation.navigate('AddCard', { title: deck.title })} 
-                        title='Add Card'
+                        title='Create New Question'
                     />
                     {deck.questions.length > 0 &&
                         <Button 
